@@ -44,17 +44,22 @@ export default function Cards({
 
   return (
     <div className="cards">
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        pokemonData.map((pokemon) => (
-          <Card
-            key={pokemon.name}
-            pokemon={pokemon}
-            handleClick={handleClick}
-          />
-        ))
-      )}
+      {loading
+        ? Array.from({ length: cardCount }).map((_, index) => (
+            <Card
+              key={index}
+              pokemon={{ name: "Loading...", url: "" }}
+              handleClick={null}
+            />
+          ))
+        : pokemonData.map((pokemon) => (
+            <Card
+              key={pokemon.name}
+              pokemon={pokemon}
+              handleClick={handleClick}
+              placeholder={false}
+            />
+          ))}
     </div>
   );
 }
